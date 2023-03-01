@@ -8,8 +8,6 @@ class HomePage extends StatefulWidget {
 }
 
 class HomePageState extends State<HomePage> {
-  bool light = false;
-  bool invertor = false;
   
   @override
   Widget build(BuildContext context) {
