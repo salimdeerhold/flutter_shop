@@ -1,8 +1,24 @@
+import 'package:dio/dio.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:retrofit/retrofit.dart';
 
 import '../rating/rating.dart';
 
 part 'product.g.dart';
+
+
+const BASE_URL = 'https://fakestoreapi.com';
+
+
+@RestApi(baseUrl: BASE_URL)
+abstract class RestClient {
+  factory RestClient(Dio dio) = _RestClient;
+
+  @GET("/products?limit=5")
+  Future<List<Product>> getProductList();
+}
+
+
 
 @JsonSerializable()
 class Product {
