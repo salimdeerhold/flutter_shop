@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../const/colors.dart';
+
 class ProductCart extends StatelessWidget {
 //   https://dribbble.com/shots/16755367-WECOM-Ecommerce-App/attachments/11803289?mode=media
   final String? imageUrl;
@@ -15,30 +17,40 @@ class ProductCart extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        height: 170,
-        width: 110,
-        padding: const EdgeInsets.symmetric(vertical: 5.0, horizontal: 8.0),
+      margin: const EdgeInsets.symmetric(horizontal: 5.0,vertical: 4),
+        padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 8.0),
         decoration: BoxDecoration(
-            color: Colors.blueAccent,
-            borderRadius: BorderRadius.circular(10.0)),
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(10.0),
+            boxShadow:const [
+                BoxShadow(
+              color: Colors.grey,
+              blurRadius: 2.0,
+              spreadRadius: 1.0,
+              offset: Offset(2, 2)
+            )
+            ] 
+            ),
         child: Column(
           children: [
-            imageUrl!=null ? 
+            imageUrl != null ? 
             Image.network(
-              //'https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg',
               imageUrl!,
-              height: 70,
-              width: 100,
+              height: 100,
+              width: double.maxFinite,
               fit: BoxFit.cover,
-            ):const SizedBox(child: Icon(Icons.error),height: 70,width: 100,),
-
-            const SizedBox(height: 2),
-            Text(
-              productName,
-              style: TextStyle(fontSize: 10),
-              maxLines: 2,
+            ):const SizedBox(height: 100,width: 100,child: Icon(Icons.error),),
+            const SizedBox(height: 8),
+            SizedBox(
+              height: 38.0,
+              child: Text(
+                productName,
+                style:const TextStyle(fontSize: 14),
+                textAlign: TextAlign.center,
+                maxLines: 2,
+              ),
             ),
-            const SizedBox(height: 2),
+            const Expanded(child: SizedBox()),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -47,13 +59,16 @@ class ProductCart extends StatelessWidget {
                   style:const TextStyle(fontSize: 17),
                   maxLines: 2,
                 ),
-                IconButton(
-                  icon: const Icon(
-                    Icons.shopping_cart,
-                    size: 14,
-                  ),
-                  onPressed: () {},
-                )
+                GestureDetector(
+                  onTap:(){print('added');} ,
+                  child: Container(
+                    padding:const EdgeInsets.all(8),
+                    decoration:const BoxDecoration(
+                    color: AppColor.kPrimary,
+                      borderRadius:BorderRadius.only(bottomRight: Radius.circular(8))
+                    ),
+                    child:const Icon(Icons.shopping_cart,size: 14,),)),
+                
               ],
             ),
           ],

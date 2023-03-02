@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_proj_06/const/colors.dart';
 import 'package:flutter_proj_06/models/product/product.dart';
 import 'package:flutter_proj_06/widgets/product_cart.dart';
 
@@ -36,9 +37,9 @@ class HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(),
       body: Container(
-        padding: EdgeInsets.all(8),
+        padding: const EdgeInsets.symmetric(horizontal:8,vertical: 1),
         width: double.infinity,
-        color: Colors.amber,
+        color: AppColor.kBackground,
         child: _buildBody(context),
       ),
     );
@@ -46,23 +47,35 @@ class HomePageState extends State<HomePage> {
 }
 
 GridView _buildPosts(BuildContext context, List<Product> productList) {
+  
   return GridView.builder(
-    
-    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-      crossAxisCount: 2,
-      crossAxisSpacing: 8,
-      mainAxisSpacing: 8,
-      childAspectRatio: 0.9
-    ),
-    itemBuilder: (context, index) {
-      Product product = productList[index];
-      return ProductCart(productName: product.title,productPrice: product.price,);
-    },
-    itemCount: productList.length,
-  );
+      itemCount: productList.length,
+      gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+        maxCrossAxisExtent: 180,
+        crossAxisSpacing: 16,
+        mainAxisSpacing: 16,
+        mainAxisExtent: 200,
+      ),
+      itemBuilder: (context, index) {
+        Product product = productList[index];
+        return ProductCart(
+          productName: product.title,
+          productPrice: product.price,
+          imageUrl: product.image,
+        );
+      });
 }
 
 /*
+
+Container(
+          color: colorList[index],
+          height: 2000,
+          width: 500,
+        )
+
+
+
 GridView.builder(
       //crossAxisCount: 2,
       itemCount: productList.length,
