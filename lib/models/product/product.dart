@@ -14,7 +14,7 @@ const BASE_URL = 'https://fakestoreapi.com';
 abstract class RestClient {
   factory RestClient(Dio dio) = _RestClient;
 
-  @GET("/products?limit=10")
+  @GET("/products?limit=15")
   Future<List<Product>> getProductList();
 }
 

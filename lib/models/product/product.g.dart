@@ -56,7 +56,7 @@ class _RestClient implements RestClient {
     )
             .compose(
               _dio.options,
-              '/products?limit=5',
+              '/products?limit=15',
               queryParameters: queryParameters,
               data: _data,
             )

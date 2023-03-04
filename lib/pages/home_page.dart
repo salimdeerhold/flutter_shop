@@ -10,6 +10,7 @@ import 'detail_page.dart';
 final pLProvider = FutureProvider<List<Product>>((ref) async {
   final client = RestClient(Dio(BaseOptions(contentType: "application/json")));
   List<Product> list = await client.getProductList();
+  print(list.length);
   return list;
 });
 
