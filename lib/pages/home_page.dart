@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_proj_06/const/colors.dart';
 import 'package:flutter_proj_06/models/product/product.dart';
+import 'package:flutter_proj_06/widgets/appbar/appbar.dart';
 import 'package:flutter_proj_06/widgets/product_cart.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -20,6 +21,7 @@ class HomePage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final future = ref.watch(pLProvider);
     return Scaffold(
+      appBar:const CustomAppBar(title: 'Shopy',),
       body: Container(
         padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 1),
         width: double.infinity,
