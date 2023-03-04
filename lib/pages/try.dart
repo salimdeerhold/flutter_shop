@@ -1,6 +1,5 @@
 
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class Try extends StatelessWidget {
@@ -15,7 +14,6 @@ class Try extends StatelessWidget {
     Colors.amber,
     Colors.blueGrey,
     Colors.indigo,
-
   ];
 
   Try({Key? key}) : super(key: key);
@@ -26,9 +24,9 @@ class Try extends StatelessWidget {
       itemCount: 10,
       gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
         maxCrossAxisExtent: 180,
+        mainAxisExtent:200,
         crossAxisSpacing: 16,
         mainAxisSpacing: 16,
-        mainAxisExtent:200,
 
        
   )
@@ -39,6 +37,7 @@ class Try extends StatelessWidget {
       });
   }
 }
+
 
 /*
 SliverGridDelegateWithMaxCrossAxisExtent(

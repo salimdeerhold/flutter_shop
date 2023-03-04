@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_proj_06/pages/detail_page.dart';
 
 import '../const/colors.dart';
 
