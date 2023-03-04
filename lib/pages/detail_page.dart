@@ -1,10 +1,8 @@
-
 import 'package:flutter/material.dart';
-import 'package:flutter_proj_06/const/colors.dart';
-import 'package:flutter_proj_06/models/product/product.dart';
 
-import '../widgets/card_with_icon_n_text.dart';
-import '../widgets/custom_button.dart';
+import '../const/const.dart';
+import '../models/models.dart';
+import '../widgets/widgets.dart';
 
 class DetailPage extends StatelessWidget {
   final Product product;
@@ -79,7 +77,6 @@ class DetailPage extends StatelessWidget {
     );
   }
 }
-
 
 class RatingSection extends StatelessWidget {
   const RatingSection({Key? key, this.rate, this.count}) : super(key: key);
