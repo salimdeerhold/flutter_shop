@@ -1,16 +1,17 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_proj_06/common/navigation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../const/const.dart';
 import '../models/product/product.dart';
 import '../widgets/widgets.dart';
+import 'cart_page.dart';
 import 'detail_page.dart';
 
 final pLProvider = FutureProvider<List<Product>>((ref) async {
   final client = RestClient(Dio(BaseOptions(contentType: "application/json")));
   List<Product> list = await client.getProductList();
-  print(list.length);
   return list;
 });
 
@@ -21,8 +22,12 @@ class HomePage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final future = ref.watch(pLProvider);
     return Scaffold(
-      appBar: const CustomAppBar(
+      appBar: CustomAppBar(
         title: 'Shopy',
+        trailingIcon: Icons.shopping_cart,
+        trailingIconOnPress:(){
+          navigateTo(context, CartPage());
+        },
       ),
       body: Container(
         padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 1),

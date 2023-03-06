@@ -1,15 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_proj_06/notifier/cart_notifier.dart';
+import 'package:flutter_proj_06/common/custom_snackbar.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../const/const.dart';
 import '../models/models.dart';
 import '../widgets/widgets.dart';
 
-class DetailPage extends StatelessWidget {
+
+
+class DetailPage extends ConsumerWidget {
   final Product product;
   const DetailPage(this.product, {Key? key}) : super(key: key);
-
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context,WidgetRef ref) {
     return Scaffold(
       body: Container(
         padding: const EdgeInsets.all(8),
@@ -64,7 +68,10 @@ class DetailPage extends StatelessWidget {
                   descriptionBody: product.description,
                 ),
                 CustomButton(
-                  onPress: () {},
+                  onPress: () {
+                    ref.read(cartProvider.notifier).addToCart(product);
+                    showSnackBar(context, 'added');
+                  },
                   icon: Icons.shopping_cart,
                   text: 'Add To Cart',
                   padding: const EdgeInsets.symmetric(vertical: 8),
