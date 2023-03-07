@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_proj_06/common/navigation.dart';
+import 'package:flutter_proj_06/const/strings.dart';
 import 'package:flutter_proj_06/notifier/cart_notifier.dart';
 import 'package:flutter_proj_06/common/custom_snackbar.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -15,6 +17,7 @@ class DetailPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context,WidgetRef ref) {
     return Scaffold(
+      appBar: CustomAppBar(leadingIcon:Icons.chevron_left,leadingIconOnPress:(){navigateBackTo(context);},),
       body: Container(
         padding: const EdgeInsets.all(8),
         color: AppColor.kBackground,
@@ -26,17 +29,21 @@ class DetailPage extends ConsumerWidget {
                 const SizedBox(
                   height: 10,
                 ),
-                Image.network(
-                  product.image,
-                  height: 220,
+                Container(
                   width: double.maxFinite,
+                  color: AppColor.kWhite,
+                  child: Image.network(
+                    product.image,
+                    height: 220,
+                    width: double.maxFinite,
+                  ),
                 ),
                 const SizedBox(
                   height: 10,
                 ),
                 Text(
                   product.title,
-                  style: const TextStyle(fontSize: 17),
+                  style: const TextStyle(fontSize: 17,fontWeight: FontWeight.bold),
                 ),
                 const SizedBox(
                   height: 10,
@@ -57,23 +64,24 @@ class DetailPage extends ConsumerWidget {
                   height: 10,
                 ),
                 DescriptionSection(
-                  descriptionTitle: 'Category',
+                  descriptionTitle:AppString.category ,
                   descriptionBody: product.category,
                 ),
                 const SizedBox(
                   height: 10,
                 ),
                 DescriptionSection(
-                  descriptionTitle: 'Description',
+                  descriptionTitle: AppString.description,
                   descriptionBody: product.description,
                 ),
                 CustomButton(
                   onPress: () {
                     ref.read(cartProvider.notifier).addToCart(product);
-                    showSnackBar(context, 'added');
+                    showSnackBar(context, 'Added To Cart');
+                    navigateBackTo(context);
                   },
                   icon: Icons.shopping_cart,
-                  text: 'Add To Cart',
+                  text: AppString.addToCart,
                   padding: const EdgeInsets.symmetric(vertical: 8),
                 ),
               ],

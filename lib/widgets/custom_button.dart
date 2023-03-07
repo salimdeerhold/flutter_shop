@@ -27,7 +27,7 @@ class CustomButton extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
           if (icon != null)Icon(icon),
-          if (text != null)Text(text!), 
+          if (text != null)Text(text!,style: TextStyle(fontSize: 17),), 
           ],
           )
       ),

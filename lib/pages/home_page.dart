@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_proj_06/common/navigation.dart';
+import 'package:flutter_proj_06/const/strings.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../const/const.dart';
@@ -23,10 +24,10 @@ class HomePage extends ConsumerWidget {
     final future = ref.watch(pLProvider);
     return Scaffold(
       appBar: CustomAppBar(
-        title: 'Shopy',
+        title: AppString.homePageTitle,
         trailingIcon: Icons.shopping_cart,
         trailingIconOnPress:(){
-          navigateTo(context, CartPage());
+          navigateTo(context, const CartPage());
         },
       ),
       body: Container(
@@ -45,7 +46,7 @@ class HomePage extends ConsumerWidget {
                   width: 8,
                 ),
                 Text(
-                  'Loading',
+                  AppString.loading,
                   style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
                 ),
               ])),

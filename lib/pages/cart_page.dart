@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_proj_06/common/navigation.dart';
 import 'package:flutter_proj_06/const/colors.dart';
+import 'package:flutter_proj_06/const/strings.dart';
 import 'package:flutter_proj_06/models/models.dart';
 import 'package:flutter_proj_06/widgets/appbar/appbar.dart';
 import 'package:flutter_proj_06/widgets/custom_button.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../notifier/cart_notifier.dart';
+import '../provider/total_price_provider.dart';
 
 class CartPage extends ConsumerWidget {
   const CartPage({Key? key}) : super(key: key);
@@ -21,7 +23,7 @@ class CartPage extends ConsumerWidget {
         leadingIconOnPress: () {
           navigateBackTo(context);
         },
-        title: 'Cart',
+        title: AppString.cartPageTitle,
       ),
       body: Column(
         children: [
@@ -50,7 +52,7 @@ class CartPage extends ConsumerWidget {
                           style: const TextStyle(fontSize: 17),
                         ),
                         trailing: IconButton(
-                            icon: Icon(Icons.close), onPressed: () {
+                            icon:const Icon(Icons.close), onPressed: () {
                               ref.read(cartProvider.notifier).removeFromCart(productList[index].id);
                             }),
                       ),
@@ -67,8 +69,8 @@ class CartPage extends ConsumerWidget {
           ),
           CustomButton(
             onPress: () {},
-            text: 'Checkout',
-            padding: EdgeInsets.all(4),
+            text: AppString.checkout,
+            padding: const EdgeInsets.all(4),
           )
         ],
       ),
@@ -77,16 +79,3 @@ class CartPage extends ConsumerWidget {
 }
 
 
-final totalPriceProvider = Provider<double>((ref){
-  final List<Product> list =  ref.watch(cartProvider);
-  if(list.isEmpty){
-    return 0;
-  }else{
-    double total=0.0;
-   for(final p in list){
-    total+= p.price ;
-  }
-  return total;
-  }
-  
-});
