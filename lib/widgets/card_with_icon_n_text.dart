@@ -14,6 +14,8 @@ class CardWithIconNText extends StatelessWidget {
       child: Padding(
         padding: EdgeInsets.all(padding),
         child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+
           children: [
             Icon(
               icon,

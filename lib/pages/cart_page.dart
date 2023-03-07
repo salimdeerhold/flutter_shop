@@ -15,6 +15,8 @@ class CartPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final List<Product> productList = ref.watch(cartProvider);
+    double totalPrice = ref.watch(totalPriceProvider);
+
     return Scaffold(
       backgroundColor: AppColor.kBackground,
       appBar: CustomAppBar(
@@ -23,58 +25,71 @@ class CartPage extends ConsumerWidget {
           navigateBackTo(context);
         },
         title: AppString.cartPageTitle,
+        trailingIcon: Icons.cached,
+        trailingIconOnPress: (){
+          ref.read(cartProvider.notifier).removeAllFromCart();
+        },
+
       ),
       body: Column(
         children: [
           Expanded(
-            child: ListView.builder(
-                itemCount: productList.length,
-                itemBuilder: ((context, index) => Padding(
-                      padding:
-                          const EdgeInsets.only(left: 4.0, right: 4.0, top: 4),
-                      child: ListTile(
-                        tileColor: AppColor.kWhite,
-                        leading: Image.network(
-                          productList[index].image,
-                          height: 60,
-                          width: 60,
-                          fit: BoxFit.cover,
-                        ),
-                        title: Text(
-                          productList[index].title,
-                          style: const TextStyle(fontSize: 14),
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                        subtitle: Text(
-                          "\$ ${productList[index].price.toString()}",
-                          style: const TextStyle(fontSize: 17),
-                        ),
-                        trailing: IconButton(
-                            icon:const Icon(Icons.close), onPressed: () {
-                              ref.read(cartProvider.notifier).removeFromCart(productList[index].id);
-                            }),
-                      ),
-                    ))),
+            child: totalPrice == 0.0
+                ? const CardWithIconNText(
+                    text: 'Nothing added to Cart',
+                  )
+                : ListView.builder(
+                    itemCount: productList.length,
+                    itemBuilder: ((context, index) => Padding(
+                          padding: const EdgeInsets.only(
+                              left: 4.0, right: 4.0, top: 4),
+                          child: ListTile(
+                            tileColor: AppColor.kWhite,
+                            leading: Image.network(
+                              productList[index].image,
+                              height: 60,
+                              width: 60,
+                              fit: BoxFit.cover,
+                            ),
+                            title: Text(
+                              productList[index].title,
+                              style: const TextStyle(fontSize: 14),
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                            subtitle: Text(
+                              "\$ ${productList[index].price.toString()}",
+                              style: const TextStyle(fontSize: 17),
+                            ),
+                            trailing: IconButton(
+                                icon: const Icon(Icons.close),
+                                onPressed: () {
+                                  ref
+                                      .read(cartProvider.notifier)
+                                      .removeFromCart(productList[index].id);
+                                }),
+                          ),
+                        ))),
           ),
           Container(
             width: double.maxFinite,
             height: 30,
             alignment: Alignment.center,
-            decoration:const  BoxDecoration(
-              color: AppColor.kBackground,
-              border: Border(top: BorderSide())),
-            child: Text('Total ${ref.watch(totalPriceProvider)}',style: const TextStyle(fontSize: 17),),
+            decoration: const BoxDecoration(
+                color: AppColor.kBackground, border: Border(top: BorderSide())),
+            child: Text(
+              'Total $totalPrice',
+              style: const TextStyle(fontSize: 17),
+            ),
           ),
-          CustomButton(
-            onPress: () {},
-            text: AppString.checkout,
-            padding: const EdgeInsets.all(4),
-          )
+          if (totalPrice != 0.0)
+            CustomButton(
+              onPress: () {},
+              text: AppString.checkout,
+              padding: const EdgeInsets.all(4),
+            )
         ],
       ),
     );
   }
 }
-
-

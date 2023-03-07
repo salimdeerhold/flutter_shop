@@ -17,6 +17,9 @@ class CartNotifier extends StateNotifier<List<Product>> {
           for(final product in state)
             if(product.id != productId )product,
     ];
-
+  }
+  
+  void removeAllFromCart() {
+    state = [];
   }
 }
