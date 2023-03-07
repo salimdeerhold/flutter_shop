@@ -3,12 +3,11 @@ import 'package:flutter_proj_06/common/navigation.dart';
 import 'package:flutter_proj_06/const/colors.dart';
 import 'package:flutter_proj_06/const/strings.dart';
 import 'package:flutter_proj_06/models/models.dart';
-import 'package:flutter_proj_06/widgets/appbar/appbar.dart';
-import 'package:flutter_proj_06/widgets/custom_button.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../notifier/cart_notifier.dart';
 import '../provider/total_price_provider.dart';
+import '../widgets/widgets.dart';
 
 class CartPage extends ConsumerWidget {
   const CartPage({Key? key}) : super(key: key);

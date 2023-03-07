@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_proj_06/common/navigation.dart';
-import 'package:flutter_proj_06/const/strings.dart';
-import 'package:flutter_proj_06/notifier/cart_notifier.dart';
-import 'package:flutter_proj_06/common/custom_snackbar.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../common/common.dart';
 import '../const/const.dart';
 import '../models/models.dart';
+import '../notifier/notifier.dart';
 import '../widgets/widgets.dart';
 
 
@@ -48,7 +46,7 @@ class DetailPage extends ConsumerWidget {
                 const SizedBox(
                   height: 10,
                 ),
-                RatingSection(
+                RatingSectionCard(
                   rate: product.rating.rate,
                   count: product.rating.count,
                 ),
@@ -89,59 +87,6 @@ class DetailPage extends ConsumerWidget {
           ),
         ),
       ),
-    );
-  }
-}
-
-class RatingSection extends StatelessWidget {
-  const RatingSection({Key? key, this.rate, this.count}) : super(key: key);
-  final double? rate;
-  final int? count;
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: [
-        CardWithIconNText(icon: Icons.star, text: rate.toString()),
-        const SizedBox(
-          width: 4,
-        ),
-        Text('\($count ratings\)',
-            style: const TextStyle(color: AppColor.kRatingText)),
-      ],
-    );
-  }
-}
-
-class DescriptionSection extends StatelessWidget {
-  const DescriptionSection(
-      {Key? key, required this.descriptionTitle, required this.descriptionBody})
-      : super(key: key);
-  final String descriptionTitle;
-  final String descriptionBody;
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          descriptionTitle,
-          style: const TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
-        ),
-        Container(
-            margin: const EdgeInsets.only(top: 4),
-            padding: const EdgeInsets.all(8),
-            decoration: BoxDecoration(
-              color: Colors.grey.shade300,
-              borderRadius: BorderRadius.circular(10),
-            ),
-            child: Text(
-              descriptionBody,
-              style: const TextStyle(
-                fontSize: 14,
-              ),
-            ))
-      ],
     );
   }
 }
