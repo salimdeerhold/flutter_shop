@@ -7,6 +7,9 @@ import '../models/models.dart';
 import '../widgets/widgets.dart';
 import 'detail_page.dart';
 
+List<Product> searchedProductList=[];
+
+final searchProductProvider = StateProvider<List<Product>>((ref)=>searchedProductList);
 
 
 
@@ -15,7 +18,7 @@ class SearchPage extends ConsumerWidget {
   final searchTextController = TextEditingController();
   @override
   Widget build(BuildContext context,WidgetRef ref) {
-    final productList = ref.watch(pLProvider).value??[];
+    searchedProductList = ref.watch(pLProvider).value??[];
     return SafeArea(
       child: Scaffold(
         body: Padding(
@@ -24,6 +27,10 @@ class SearchPage extends ConsumerWidget {
             children: [
               TextField(
                 controller: searchTextController,
+                onChanged: (String value){
+                    ref.watch(searchProductProvider.notifier).state = searchedProductList.where((product)=>product.title.contains(value)).toList();
+
+                },
                 //autofocus: true,
                 decoration: InputDecoration(
                   prefixIcon: const Icon(Icons.search),
@@ -47,7 +54,7 @@ class SearchPage extends ConsumerWidget {
               ),
               Expanded(
                 child: GridView.builder(
-                          itemCount: productList.length,
+                          itemCount: searchedProductList.length,
                           gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
                 maxCrossAxisExtent: 180,
                 crossAxisSpacing: 16,
@@ -55,7 +62,7 @@ class SearchPage extends ConsumerWidget {
                 mainAxisExtent: 200,
                           ),
                           itemBuilder: (context, index) {
-                Product product = productList[index];
+                Product product = searchedProductList[index];
                 return GestureDetector(
                   onTap: () {
                     Navigator.of(context).push(MaterialPageRoute(
