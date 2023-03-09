@@ -6,9 +6,7 @@ import '../rating/rating.dart';
 
 part 'product.g.dart';
 
-
 const BASE_URL = 'https://fakestoreapi.com';
-
 
 @RestApi(baseUrl: BASE_URL)
 abstract class RestClient {
@@ -20,10 +18,10 @@ abstract class RestClient {
   @GET("/products/categories")
   Future<List<String>> getCategoriesList();
 
-  
+  @GET("/products/category/{categoryName}")
+  Future<List<Product>> getCategoriesDataList(
+      @Path("categoryName") String categoryName);
 }
-
-
 
 @JsonSerializable()
 class Product {
@@ -49,5 +47,4 @@ class Product {
       _$ProductFromJson(json);
 
   Map<String, dynamic> toJson() => _$ProductToJson(this);
-
 }
