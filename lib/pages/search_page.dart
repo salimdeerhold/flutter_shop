@@ -9,7 +9,10 @@ import 'detail_page.dart';
 
 List<Product> searchedProductList=[];
 
-final searchProductProvider = StateProvider<List<Product>>((ref)=>searchedProductList);
+final searchProductProvider = StateProvider<List<Product>>((ref) {
+  searchedProductList = ref.watch(pLProvider).value??[];
+  return searchedProductList;
+});
 
 
 
@@ -18,7 +21,8 @@ class SearchPage extends ConsumerWidget {
   final searchTextController = TextEditingController();
   @override
   Widget build(BuildContext context,WidgetRef ref) {
-    searchedProductList = ref.watch(pLProvider).value??[];
+    print("buidl");
+   // searchedProductList = ref.watch(pLProvider).value??[];
     return SafeArea(
       child: Scaffold(
         body: Padding(
@@ -27,7 +31,8 @@ class SearchPage extends ConsumerWidget {
             children: [
               TextField(
                 controller: searchTextController,
-                onChanged: (String value){
+                onChanged: (String value) async{
+                  print(value);
                     print(searchedProductList.where((product)=>product.title.contains(value)).toList());
 
                     ref.read(searchProductProvider.notifier).state = searchedProductList.where((product)=>product.title.contains(value)).toList();
@@ -54,29 +59,34 @@ class SearchPage extends ConsumerWidget {
                   hintText: 'Search ...',
                 ),
               ),
-              Expanded(
-                child: GridView.builder(
-                          itemCount: searchedProductList.length,
-                          gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-                maxCrossAxisExtent: 180,
-                crossAxisSpacing: 16,
-                mainAxisSpacing: 16,
-                mainAxisExtent: 200,
-                          ),
-                          itemBuilder: (context, index) {
-                Product product = searchedProductList[index];
-                return GestureDetector(
-                  onTap: () {
-                    Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => DetailPage(product)));
-                  },
-                  child: ProductCart(
-                    productName: product.title,
-                    productPrice: product.price,
-                    imageUrl: product.image,
-                  ),
+              Consumer(builder: (context,ref,_) {
+                final v= ref.watch(searchProductProvider);
+                
+                return Expanded(
+                  child: GridView.builder(
+                            itemCount: v.length,
+                            gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+                  maxCrossAxisExtent: 180,
+                  crossAxisSpacing: 16,
+                  mainAxisSpacing: 16,
+                  mainAxisExtent: 200,
+                            ),
+                            itemBuilder: (context, index) {
+                  Product product = v[index];
+                  return GestureDetector(
+                    onTap: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => DetailPage(product)));
+                    },
+                    child: ProductCart(
+                      productName: product.title,
+                      productPrice: product.price,
+                      imageUrl: product.image,
+                    ),
+                  );
+                            }),
                 );
-                          }),
+              },
               ),
             ],
           ),
