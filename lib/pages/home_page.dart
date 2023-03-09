@@ -1,7 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_proj_06/common/navigation.dart';
-import 'package:flutter_proj_06/const/strings.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../const/const.dart';
@@ -41,7 +40,7 @@ class HomePage extends ConsumerWidget {
               child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: const [
-                CircularProgressIndicator(),
+                CustomCircularProgressIndicator(size: 8),
                 SizedBox(
                   width: 8,
                 ),
