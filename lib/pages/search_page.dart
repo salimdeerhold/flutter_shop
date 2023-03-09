@@ -28,7 +28,9 @@ class SearchPage extends ConsumerWidget {
               TextField(
                 controller: searchTextController,
                 onChanged: (String value){
-                    ref.watch(searchProductProvider.notifier).state = searchedProductList.where((product)=>product.title.contains(value)).toList();
+                    print(searchedProductList.where((product)=>product.title.contains(value)).toList());
+
+                    ref.read(searchProductProvider.notifier).state = searchedProductList.where((product)=>product.title.contains(value)).toList();
 
                 },
                 //autofocus: true,
