@@ -33,12 +33,12 @@ class SearchPage extends ConsumerWidget {
                 controller: searchTextController,
                 onChanged: (String value) async{
                   print(value);
-                    print(searchedProductList.where((product)=>product.title.contains(value)).toList());
+                    print(searchedProductList.where((product)=>product.title.toLowerCase().contains(value.toLowerCase())).toList());
 
-                    ref.read(searchProductProvider.notifier).state = searchedProductList.where((product)=>product.title.contains(value)).toList();
+                    ref.read(searchProductProvider.notifier).state = searchedProductList.where((product)=>product.title.toLowerCase().contains(value.toLowerCase())).toList();
 
                 },
-                //autofocus: true,
+                autofocus: true,
                 decoration: InputDecoration(
                   prefixIcon: const Icon(Icons.search),
                   suffixIcon: IconButton(
