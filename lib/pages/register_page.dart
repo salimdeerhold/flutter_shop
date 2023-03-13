@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_proj_06/common/common.dart';
 
 import '../const/const.dart';
 import '../widgets/widgets.dart';
@@ -74,6 +75,7 @@ class _RegisterPageState extends State<RegisterPage> {
                           return null;
                       },
                     ),
+                    
                     CustomButton(
                       onPress: () {
                         if (_registerFormKey.currentState!.validate()) {
@@ -81,9 +83,26 @@ class _RegisterPageState extends State<RegisterPage> {
                         }
                       },
                       text: AppString.register,
-                    )
+                    ),
+                    const SizedBox(
+                    height: 4,
+                  ),
+                    Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children:  [
+                      const Text('Already have an Account, '),
+                      GestureDetector(
+                        onTap: () => navigateBackTo(context),
+                        child: const Text(
+                          'Login in',
+                          style: TextStyle(color: AppColor.kPrimary),
+                        ),
+                      ),
+                    ],
+                  ),
                   ],
                 ),
+                
               ),
             ),
           ),

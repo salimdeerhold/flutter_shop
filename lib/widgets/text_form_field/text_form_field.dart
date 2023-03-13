@@ -41,6 +41,8 @@ class CustomTextFormField extends StatelessWidget {
               : null,
           focusedBorder: focousedOutLineInputBorder,
           enabledBorder: enabledOutLineInputBorder,
+          border: focousedOutLineInputBorder,
+          disabledBorder: enabledOutLineInputBorder,
         ),
         validator: validator,
       ),
