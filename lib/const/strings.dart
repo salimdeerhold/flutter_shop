@@ -4,6 +4,10 @@ class AppString{
   // button
   static const checkout =  'Checkout';
   static const addToCart =  'Add To Cart';
+  static const login =  'Login';
+  static const register =  'Register';
+
+
   
   
   //page title

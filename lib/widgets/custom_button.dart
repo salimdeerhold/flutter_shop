@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../const/colors.dart';
 
 class CustomButton extends StatelessWidget {
-  const CustomButton({Key? key, required this.onPress, this.icon, this.text,this.width=double.maxFinite,this.height=50,this.padding})
+  const CustomButton({Key? key, required this.onPress, this.icon, this.text,this.width=double.maxFinite,this.height=40,this.padding})
       : super(key: key);
   final Function() onPress;
   final IconData? icon;

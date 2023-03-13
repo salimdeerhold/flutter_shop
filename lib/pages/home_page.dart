@@ -1,6 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_proj_06/common/navigation.dart';
+import 'package:flutter_proj_06/const/strings.dart';
+import 'package:flutter_proj_06/pages/search_page.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../const/const.dart';
@@ -24,9 +26,9 @@ class HomePage extends ConsumerWidget {
     return Scaffold(
       appBar: CustomAppBar(
         title: AppString.homePageTitle,
-        trailingIcon: Icons.shopping_cart,
+        trailingIcon: Icons.search,
         trailingIconOnPress:(){
-          navigateTo(context, const CartPage());
+          navigateTo(context,  SearchPage());
         },
       ),
       body: Container(
