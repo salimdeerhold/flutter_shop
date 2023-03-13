@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_proj_06/common/common.dart';
+import 'package:flutter_proj_06/pages/home_page.dart';
+import 'package:flutter_proj_06/pages/register_page.dart';
 
 import '../const/const.dart';
 import '../widgets/widgets.dart';
@@ -65,10 +68,27 @@ class _LoginPageState extends State<LoginPage> {
                     onPress: () {
                       if (_loginFormKey.currentState!.validate()) {
                         print('woooooooooooooooooooooooo');
+                        navigateWithReplacementTo(context, HomePage());
                       }
                     },
-                    text: 'Login',
-                  )
+                    text: AppString.login,
+                  ),
+                  const SizedBox(
+                    height: 4,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children:  [
+                      const Text('No Account Yet, '),
+                      GestureDetector(
+                        onTap: () => navigateTo(context, const RegisterPage()),
+                        child: const Text(
+                          'Create one',
+                          style: TextStyle(color: AppColor.kPrimary),
+                        ),
+                      ),
+                    ],
+                  ),
                 ],
               ),
             ),

@@ -8,3 +8,7 @@ navigateTo(BuildContext context, Widget nextPage) {
 navigateBackTo(BuildContext context) {
   Navigator.of(context).pop();
 }
+
+navigateWithReplacementTo(BuildContext context, Widget nextPage) {
+  Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) =>nextPage));
+}
