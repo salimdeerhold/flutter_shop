@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_proj_06/common/navigation.dart';
 import 'package:flutter_proj_06/const/colors.dart';
 import 'package:flutter_proj_06/const/strings.dart';
 import 'package:flutter_proj_06/models/models.dart';
@@ -20,10 +19,6 @@ class CartPage extends ConsumerWidget {
     return Scaffold(
       backgroundColor: AppColor.kBackground,
       appBar: CustomAppBar(
-        leadingIcon: Icons.chevron_left,
-        leadingIconOnPress: () {
-          navigateBackTo(context);
-        },
         title: AppString.cartPageTitle,
         trailingIcon: Icons.cached,
         trailingIconOnPress: (){
