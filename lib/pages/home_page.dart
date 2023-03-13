@@ -42,7 +42,7 @@ class HomePage extends ConsumerWidget {
               child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: const [
-                CircularProgressIndicator(),
+                CustomCircularProgressIndicator(size: 8),
                 SizedBox(
                   width: 8,
                 ),
