@@ -7,6 +7,7 @@ class AppColor{
   static const kRatingText =  Color(0xff739dee);
   static const kBlack =  Colors.black;
   static const kWhite =  Colors.white;
+  static const kCard =  Color(0xffe2e8f6);
   
   
 }

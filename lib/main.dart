@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_proj_06/pages/login_page.dart';
+import 'package:flutter_proj_06/pages/register_page.dart';
 import 'package:flutter_proj_06/pages/bottom_navigation_page.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -19,7 +21,7 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        home:const BottomNavigationPage(),
+        home:const RegisterPage(),
         //Try() 
       ),
     );
